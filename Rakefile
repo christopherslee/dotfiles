@@ -6,18 +6,13 @@ require 'rake'
 require 'erb'
 
 namespace :install do
-  desc "install dot files into home directory"
+  desc "everything"
   task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :fonts] do
   end
 
   desc "configure janus"
   task :configure_janus do
     install_dotfiles("vimrc.after")
-    if File.exist?(File.join(ENV['HOME'], '.gvimrc.after'))
-      msg "backing up old .gvimrc.after to .gvimrc.after.old"
-      sh "mv ~/.gvimrc.after ~/.gvimrc.after.old"
-    end
-    sh "ln -s ~/.vimrc.after ~/.gvimrc.after"
     unless File.exist?(File.join(ENV['HOME'], '.janus', 'StripWhiteSpaces'))
       sh "git clone https://github.com/gagoar/StripWhiteSpaces.git ~/.janus/StripWhiteSpaces"
     end
@@ -31,8 +26,12 @@ namespace :install do
       sh "git clone https://github.com/altercation/vim-colors-solarized ~/.janus/vim-colors-solarized"
     end
     # install run in terminal scripts
-    sh "ln -s ~/dotfiles/janus/run_in_terminal ~/.janus/run_in_terminal"
-    sh "ln -s ~/dotfiles/janus/tools ~/.janus/tools"
+    unless File.exists?(File.join(ENV['HOME'], '.janus', 'run_in_terminal'))
+      sh "ln -s ~/dotfiles/janus/run_in_terminal ~/.janus/run_in_terminal"
+    end
+    unless File.exists?(File.join(ENV['HOME'], '.janus', 'tools'))
+      sh "ln -s ~/dotfiles/janus/tools ~/.janus/tools"
+    end
   end
 
   desc "install fonts"
