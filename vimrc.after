@@ -2,7 +2,7 @@ set nocompatible
 
 set shell=/bin/bash
 set background=dark
-color solarized
+color rdark
 
 set noswapfile
 set nobackup
@@ -14,7 +14,13 @@ if has('gui_running')
   set guioptions-=L " remove left scrollbar
   set guifont=Inconsolata-dz\ for\ Powerline:h14
   let g:Powerline_symbols='fancy'
+  if has('gui_macvim')
+    set transparency=0  " Make window completely opaque
+    colorscheme solarized " Use macvim optimized color scheme
+  endif
+  nnoremap <esc> :noh<cr><esc>
 endif
+
 
 set colorcolumn=80 " 80 char column marker
 set laststatus=2 " required by powerline
@@ -33,9 +39,7 @@ set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=tmp/restart.txt
 
-nnoremap <esc> :noh<return><esc>
-cnoremap %% <C-R>=expand("%:h").'/'<cr>
 
+cnoremap %% <C-R>=expand("%:h").'/'<cr>
 " Command-R to run ruby file in terminal - Thanks Henry!
 map <D-r> :RunRubyFileInTerminal<cr>
-
