@@ -7,7 +7,13 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :configure_git, :fonts, :misc_dotfile] do
+  end
+
+  desc "configure git"
+  task :configure_git do
+    install_dotfiles("gitconfig.erb")
+    install_dotfiles("githelpers")
   end
 
   desc "configure janus"
@@ -69,7 +75,7 @@ namespace :install do
 
   desc "miscellaneous dotfile installation"
   task :misc_dotfile do
-    %w(gemrc irbrc gitconfig.erb).each do |f|
+    %w(gemrc irbrc).each do |f|
       msg "Installing #{f}"
       install_dotfiles(f)
     end
