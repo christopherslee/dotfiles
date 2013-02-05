@@ -142,15 +142,15 @@ def install_dotfiles(dir_pattern)
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
         puts "identical ~/.#{file.sub('.erb', '')}"
       elsif replace_all
-        replace_file(file)
+        replace_dotfile(file)
       else
         print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
         case $stdin.gets.chomp
         when 'a'
           replace_all = true
-          replace_file(file)
+          replace_dotfile(file)
         when 'y'
-          replace_file(file)
+          replace_dotfile(file)
         when 'q'
           exit
         else
@@ -158,12 +158,14 @@ def install_dotfiles(dir_pattern)
         end
       end
     else
-      link_file(file)
+      link_dotfile(file)
     end
   end
 end
 
-def link_file(file)
+# link the source file to a target dotfile in the user's home directory as a dotfile
+# if the source file is an erb file, render the erb file before writing (no sym link)
+def link_dotfile(file)
   if file =~ /.erb$/
     puts "generating ~/.#{file.sub('.erb', '')}"
     File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
@@ -180,7 +182,7 @@ def msg(m)
   puts "+++ #{m}"
 end
 
-def replace_file(file)
+def replace_dotfile(file)
   system %Q{rm -rf "$HOME/.#{file.sub('.erb', '')}"}
-  link_file(file)
+  link_dotfile(file)
 end
