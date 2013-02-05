@@ -7,7 +7,7 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :configure_git, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :configure_git, :link_scripts, :fonts, :misc_dotfile] do
   end
 
   desc "configure git"
@@ -70,6 +70,19 @@ namespace :install do
   task :janus do
     install_prompt("janus", File.join(ENV['HOME'], ".janus")) do
       system %Q{curl -Lo- https://bit.ly/janus-bootstrap | bash}
+    end
+  end
+
+  desc "link files in scripts to /usr/local/bin"
+  task :link_scripts do
+    Dir["scripts/**"].each do |file|
+      filename = file.split("/").last
+      if File.exist?("/usr/local/bin/#{filename}")
+         msg "/usr/local/bin/#{filename} already exists, skipping."
+       else
+        system %Q{ln -s "$PWD/scripts/#{filename}" "/usr/local/bin/#{filename}"}
+        msg "Installed scripts/#{filename} as /usr/local/bin/#{filename}"
+      end
     end
   end
 
