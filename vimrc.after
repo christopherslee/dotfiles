@@ -45,3 +45,6 @@ set wildignore+=tmp/restart.txt
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
 " Command-R to run ruby file in terminal - Thanks Henry!
 map <D-r> :RunRubyFileInTerminal<cr>
+
+" command to convert ruby 1.8 hash syntax to 1.9 syntax
+command! -bar -range=% NotRocket :<line1>,<line2>s/:\(\w\+\)\s*=>/\1:/ge
