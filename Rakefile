@@ -56,7 +56,7 @@ namespace :install do
     msg "Update homebrew and formulae"
     sh "brew update"
 
-    %w(ack git ctags fasd macvim zsh-completions qt).each do |pkg|
+    %w(ack git ctags fasd macvim zsh-completions qt git-flow).each do |pkg|
       msg "Installing #{pkg}"
       begin
         sh "brew install #{pkg}"
