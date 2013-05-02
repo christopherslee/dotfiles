@@ -40,7 +40,7 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=tmp/restart.txt
-
+set iskeyword-=_
 
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
 " Command-R to run ruby file in terminal - Thanks Henry!
