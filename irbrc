@@ -1,1 +1,1 @@
-IRB.conf[:ECHO]=false
+IRB.conf[:ECHO]=true
