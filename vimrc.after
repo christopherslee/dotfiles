@@ -9,6 +9,7 @@ set t_Co=256
 set noswapfile
 set nobackup
 set nowb
+set scrolloff=1000
 
 if has('gui_running')
   set guioptions-=T " remove toolbar
