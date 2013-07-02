@@ -73,6 +73,13 @@ namespace :install do
     end
   end
 
+  desc "install slate"
+  task :slate do
+    install_prompt("slate", File.join('/Applications', 'Slate.app')) do
+      system %Q{cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz}
+    end
+  end
+
   desc "link files in scripts to /usr/local/bin"
   task :link_scripts do
     Dir["scripts/**"].each do |file|
