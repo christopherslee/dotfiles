@@ -11,21 +11,20 @@ set nobackup
 set nowb
 set scrolloff=1000
 
+let g:ctrlp_clear_cache_on_exit=1 " clear the ctrl-p cache on exit
+let g:ctrlp_max_height=30 " show 30 lines of results
+let g:Powerline_symbols='fancy'
+
 if has('gui_running')
   set guioptions-=T " remove toolbar
   set guioptions-=r " remove right scrollbar
   set guioptions-=L " remove left scrollbar
-  set guifont=Inconsolata-dz\ for\ Powerline:h14
-  let g:Powerline_symbols='fancy'
-  let g:ctrlp_clear_cache_on_exit=1 " clear the ctrl-p cache on exit
-  let g:ctrlp_max_height=30 " show 30 lines of results
+  set guifont=Inconsolata-dz\ for\ Powerline:h12
   if has('gui_macvim')
     set transparency=0  " Make window completely opaque
     colorscheme solarized " Use macvim optimized color scheme
   endif
   nnoremap <esc> :noh<cr><esc>
-  " Command-R to run ruby file in terminal - Thanks Henry!
-  map <D-r> :RunRubyFileInTerminal<cr>
 else
   " regular vim
   "Bubble single lines (kicks butt)
