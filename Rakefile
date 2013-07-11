@@ -7,7 +7,7 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_git, :link_scripts, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_git, :slate, :rvm, :link_scripts, :fonts, :misc_dotfile] do
   end
 
   desc "configure git"
@@ -106,7 +106,7 @@ namespace :install do
     install_prompt("oh-my-zsh", File.join(ENV['HOME'], ".oh-my-zsh")) do
       system %Q{curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh}
     end
-    #install_dotfiles("oh-my-zsh")
+    sh 'ln -s ~/dotfiles/oh-my-zsh/themes/clee.zsh-theme ~/.oh-my-zsh/themes/clee.zsh-theme'
   end
 
   desc "install pow"
