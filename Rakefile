@@ -7,7 +7,7 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :configure_git, :link_scripts, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_git, :link_scripts, :fonts, :misc_dotfile] do
   end
 
   desc "configure git"
@@ -56,7 +56,7 @@ namespace :install do
     msg "Update homebrew and formulae"
     sh "brew update"
 
-    %w(ack git ctags fasd macvim zsh-completions qt git-flow tmux reattach-to-user-namespace).each do |pkg|
+    %w(ack git ctags fasd zsh-completions git-flow tmux reattach-to-user-namespace).each do |pkg|
       msg "Installing #{pkg}"
       begin
         sh "brew install #{pkg}"
