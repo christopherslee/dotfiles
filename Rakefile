@@ -7,7 +7,7 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_git, :slate, :rvm, :link_scripts, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :ssh_keygen, :configure_git, :slate, :rvm, :link_scripts, :fonts, :misc_dotfile] do
   end
 
   desc "configure git"
@@ -121,6 +121,13 @@ namespace :install do
     install_prompt("rvm", File.join(ENV['HOME'], '.rvm')) do
       system %Q{curl -L https://get.rvm.io | bash -s stable --ruby}
     end
+  end
+
+  desc "sshkey generation"
+  task :ssh_keygen do
+    puts "Email address for ssh key generation: "
+    email = $stdin.gets.chomp
+    sh "mkdir ~/.ssh;cd ~/.ssh;ssh-keygen -t rsa -C \"#{email}\""
   end
 end
 
