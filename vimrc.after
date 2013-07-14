@@ -36,6 +36,12 @@ else
   "Bubble multiple lines
   vmap <C-Up> xkP`[V`]
   vmap <C-Down> xp`[V`]
+
+
+  hi TabLineFill ctermfg=Grey ctermbg=Black
+  hi TabLine ctermfg=Blue ctermbg=Black
+  hi TabLineSel ctermfg=Blue ctermbg=White
+  hi Title ctermfg=Black
 endif
 
 set colorcolumn=80 " 80 char column marker
