@@ -7,7 +7,7 @@ require 'erb'
 
 namespace :install do
   desc "everything"
-  task :all => [:oh_my_zsh, :homebrew, :janus, :configure_vim, :configure_git, :link_scripts, :fonts, :misc_dotfile] do
+  task :all => [:oh_my_zsh, :homebrew, :janus, :ssh_keygen, :configure_git, :slate, :rvm, :link_scripts, :fonts, :misc_dotfile] do
   end
 
   desc "configure git"
@@ -56,7 +56,7 @@ namespace :install do
     msg "Update homebrew and formulae"
     sh "brew update"
 
-    %w(ack git ctags fasd macvim zsh-completions qt git-flow tmux reattach-to-user-namespace).each do |pkg|
+    %w(ack git ctags fasd zsh-completions git-flow tmux reattach-to-user-namespace).each do |pkg|
       msg "Installing #{pkg}"
       begin
         sh "brew install #{pkg}"
@@ -95,7 +95,7 @@ namespace :install do
 
   desc "miscellaneous dotfile installation"
   task :misc_dotfile do
-    %w(gemrc irbrc slate pryrc tmux.conf vimrc.after).each do |f|
+    %w(gemrc irbrc slate pryrc tmux.conf vimrc.after zshrc).each do |f|
       msg "Installing #{f}"
       install_dotfiles(f)
     end
@@ -106,7 +106,7 @@ namespace :install do
     install_prompt("oh-my-zsh", File.join(ENV['HOME'], ".oh-my-zsh")) do
       system %Q{curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh}
     end
-    #install_dotfiles("oh-my-zsh")
+    sh 'ln -s ~/dotfiles/oh-my-zsh/themes/clee.zsh-theme ~/.oh-my-zsh/themes/clee.zsh-theme'
   end
 
   desc "install pow"
@@ -121,6 +121,13 @@ namespace :install do
     install_prompt("rvm", File.join(ENV['HOME'], '.rvm')) do
       system %Q{curl -L https://get.rvm.io | bash -s stable --ruby}
     end
+  end
+
+  desc "sshkey generation"
+  task :ssh_keygen do
+    puts "Email address for ssh key generation: "
+    email = $stdin.gets.chomp
+    sh "mkdir ~/.ssh;cd ~/.ssh;ssh-keygen -t rsa -C \"#{email}\""
   end
 end
 
