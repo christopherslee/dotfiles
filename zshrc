@@ -10,6 +10,7 @@ ZSH_THEME="clee"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias tmux="nocorrect tmux"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -40,7 +41,7 @@ ZSH_THEME="clee"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git git-extras git-flow jira osx powify bundler tmux vagrant rvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -50,3 +51,5 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+source ~/.zshrc.after

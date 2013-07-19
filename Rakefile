@@ -31,6 +31,9 @@ namespace :install do
     unless File.exists?(File.join(ENV['HOME'], '.janus', 'vim-colors-solarized'))
       sh "git clone https://github.com/altercation/vim-colors-solarized ~/.janus/vim-colors-solarized"
     end
+    unless File.exists?(File.join(ENV['HOME'], '.janus', 'vim-tmux-navigator'))
+      sh "git clone https://github.com/christoomey/vim-tmux-navigator ~/.janus/vim-tmux-navigator"
+    end
     # install run in terminal scripts
     unless File.exists?(File.join(ENV['HOME'], '.janus', 'run_in_terminal'))
       sh "ln -s ~/dotfiles/janus/run_in_terminal ~/.janus/run_in_terminal"
