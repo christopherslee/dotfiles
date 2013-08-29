@@ -11,6 +11,11 @@ set nobackup
 set nowb
 set scrolloff=1000
 
+set complete+=kspell
+
+autocmd FileType gitcommit setlocal spell
+autocmd FileType markdown setlocal spell
+
 let g:ctrlp_clear_cache_on_exit=1 " clear the ctrl-p cache on exit
 let g:ctrlp_max_height=30 " show 30 lines of results
 let g:Powerline_symbols='fancy'
@@ -37,7 +42,6 @@ else
   vmap <C-Up> xkP`[V`]
   vmap <C-Down> xp`[V`]
 
-
   hi TabLineFill ctermfg=Grey ctermbg=Black
   hi TabLine ctermfg=Blue ctermbg=Black
   hi TabLineSel ctermfg=Blue ctermbg=White
@@ -46,20 +50,23 @@ endif
 
 set colorcolumn=80 " 80 char column marker
 set laststatus=2 " required by powerline
+set ignorecase " case insensitive search
 filetype on
 
 set wildmode=list:longest
 set wildmenu
-set wildignore+=*sass-cache*
-set wildignore+=out/**
-set wildignore+=coverage/**
+set wildignore+=*sass-cache/*
+set wildignore+=*out/*
+set wildignore+=*coverage/*
+set wildignore+=*tools/*
+set wildignore+=*spec/reports*
+set wildignore+=*target/*
 set wildignore+=doc/**
 set wildignore+=META-INF/**
 set wildignore+=*DS_Store*
-set wildignore+=log/**
-set wildignore+=tmp/**
+set wildignore+=*log/*
+set wildignore+=*tmp/*
 set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=tmp/restart.txt
 set iskeyword-=_
 
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
