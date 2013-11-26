@@ -62,6 +62,9 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=tmp/restart.txt
 set iskeyword-=_
 
+"swap to last buffer
+map <Leader>s :b#<CR>
+
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
 
 " command to convert ruby 1.8 hash syntax to 1.9 syntax
