@@ -3,7 +3,7 @@ set nocompatible
 set shell=/bin/bash
 let g:solarized_termtrans=1
 set background=dark
-colorscheme solarized
+colorscheme molokai
 set t_Co=256
 
 set noswapfile
@@ -27,7 +27,7 @@ if has('gui_running')
   set guifont=Inconsolata-dz\ for\ Powerline:h12
   if has('gui_macvim')
     set transparency=0  " Make window completely opaque
-    colorscheme solarized " Use macvim optimized color scheme
+    colorscheme molokai " Use macvim optimized color scheme
   endif
   nnoremap <esc> :noh<cr><esc>
 else
@@ -48,7 +48,7 @@ else
   hi Title ctermfg=Black
 endif
 
-set colorcolumn=80 " 80 char column marker
+set colorcolumn=120 " 120 char column marker
 set laststatus=2 " required by powerline
 set ignorecase " case insensitive search
 filetype on
@@ -69,8 +69,10 @@ set wildignore+=*tmp/*
 set wildignore+=*.png,*.jpg,*.gif
 set iskeyword-=_
 
-"swap to last buffer
+" swap to last buffer
 map <Leader>s :b#<CR>
+" swap to alternate file
+map <Leader>a :A<CR>
 
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
 
