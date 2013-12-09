@@ -67,7 +67,7 @@ set wildignore+=*DS_Store*
 set wildignore+=*log/*
 set wildignore+=*tmp/*
 set wildignore+=*.png,*.jpg,*.gif
-set iskeyword-=_
+set ttimeoutlen=50 " so there isn't a delay because of vim compat mode
 
 " swap to last buffer
 map <Leader>s :b#<CR>
