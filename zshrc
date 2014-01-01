@@ -52,8 +52,5 @@ export PATH=/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-# use vi on commandline
-set -o vi
-
 source ~/.zshrc.common
 source ~/.zshrc.local
