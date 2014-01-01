@@ -55,4 +55,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # use vi on commandline
 set -o vi
 
-source ~/.zshrc.after
+source ~/.zshrc.common
+source ~/.zshrc.local

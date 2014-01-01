@@ -98,7 +98,7 @@ namespace :install do
 
   desc "miscellaneous dotfile installation"
   task :misc_dotfile do
-    %w(gemrc irbrc slate pryrc tmux.conf vimrc.after zshrc).each do |f|
+    %w(gemrc irbrc slate pryrc tmux.conf vimrc.after zshrc zshrc.common).each do |f|
       msg "Installing #{f}"
       install_dotfiles(f)
     end

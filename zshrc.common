@@ -1,0 +1,2 @@
+export EDITOR=/usr/bin/vim
+alias serve='ruby -run -e httpd . -p 9090'
