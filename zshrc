@@ -48,7 +48,7 @@ source $ZSH/oh-my-zsh.sh
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+export PATH=/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
