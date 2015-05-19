@@ -34,6 +34,9 @@ namespace :install do
     unless File.exists?(File.join(ENV['HOME'], '.janus', 'vim-tmux-navigator'))
       sh "git clone https://github.com/christoomey/vim-tmux-navigator ~/.janus/vim-tmux-navigator"
     end
+    unless File.exists?(File.join(ENV['HOME'], '.janus', 'tslime'))
+      sh "git clone git@github.com:jgdavey/tslime.vim.git ~/.janus/tslime.vim"
+    end
     # install run in terminal scripts
     unless File.exists?(File.join(ENV['HOME'], '.janus', 'run_in_terminal'))
       sh "ln -s ~/dotfiles/janus/run_in_terminal ~/.janus/run_in_terminal"
