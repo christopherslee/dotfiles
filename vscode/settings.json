@@ -1,0 +1,25 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "workbench.colorTheme": "Solarized Dark",
+    "editor.minimap.enabled": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": true
+    },
+    "breadcrumbs.enabled": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#770000"
+    },
+    "files.trimTrailingWhitespace": true,
+    "editor.rulers": [
+        80
+    ],
+    "extensions.ignoreRecommendations": false
+}
