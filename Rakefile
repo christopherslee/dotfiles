@@ -56,13 +56,13 @@ namespace :install do
   task :homebrew do
     if not File.exists? "/usr/local/bin/brew"
       msg "Installing homebrew"
-      sh "ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+      sh '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
 
     msg "Update homebrew and formulae"
     sh "brew update"
 
-    %w(ack git ctags ssh-copy-id fasd zsh-completions git-flow tmux reattach-to-user-namespace).each do |pkg|
+    %w(ack git ctags ssh-copy-id fasd zsh-completions).each do |pkg|
       msg "Installing #{pkg}"
       begin
         sh "brew install #{pkg}"
@@ -115,13 +115,6 @@ namespace :install do
     sh 'ln -s ~/dotfiles/oh-my-zsh/themes/clee.zsh-theme ~/.oh-my-zsh/themes/clee.zsh-theme'
   end
 
-  desc "install pow"
-  task :pow do
-    install_prompt("pow", File.join(ENV['HOME'], ".pow")) do
-      system %Q{curl get.pow.cx | sh}
-    end
-  end
-
   desc "install rvm"
   task :rvm do
     install_prompt("rvm", File.join(ENV['HOME'], '.rvm')) do
@@ -134,6 +127,26 @@ namespace :install do
     puts "Email address for ssh key generation: "
     email = $stdin.gets.chomp
     sh "mkdir ~/.ssh;cd ~/.ssh;ssh-keygen -t rsa -C \"#{email}\""
+  end
+
+  desc "link VisualStudio Code settings"
+  task :vscode_settings do
+    filename = File.expand_path '~/Library/Application Support/Code/User/settings.json'
+    if File.exist?(filename)
+      print "overwrite #{filename}? [ynq] "
+      case $stdin.gets.chomp
+      when 'y'
+        msg "deleting #{filename}"
+        sh "rm '#{filename}'"
+      when 'q'
+        exit
+      else
+        msg "skipping Visual Studio Code settings linking"
+      end
+    end
+
+    sh "mkdir -p ~/Library/Application Support/Code/User"
+    system %Q{ln -s "$PWD/vscode/settings.json" "#{filename}"}
   end
 end
 
