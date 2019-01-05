@@ -147,6 +147,21 @@ namespace :install do
 
     sh "mkdir -p ~/Library/Application Support/Code/User"
     system %Q{ln -s "$PWD/vscode/settings.json" "#{filename}"}
+
+    filename = File.expand_path '~/Library/Application Support/Code/User/keybindings.json'
+    if File.exist?(filename)
+      print "overwrite #{filename}? [ynq] "
+      case $stdin.gets.chomp
+      when 'y'
+        msg "deleting #{filename}"
+        sh "rm '#{filename}'"
+      when 'q'
+        exit
+      else
+        msg "skipping Visual Studio Code keybinding linking"
+      end
+    end
+    system %Q{ln -s "$PWD/vscode/keybindings.json" "#{filename}"}
   end
 
   desc "link VisualStudio Code snippets"
