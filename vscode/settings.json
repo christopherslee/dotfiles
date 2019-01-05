@@ -21,5 +21,13 @@
     "editor.rulers": [
         80
     ],
-    "extensions.ignoreRecommendations": false
+    "extensions.ignoreRecommendations": false,
+    "workbench.iconTheme": "vscode-icons",
+    "elixirLS.suggestSpecs": false,
+    "elixirLS.dialyzerEnabled": false,
+    "workbench.statusBar.feedback.visible": false,
+    "[vue]": {
+       "editor.tabSize": 2
+    },
+    "editor.wordWrapColumn": 79
 }
