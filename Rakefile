@@ -148,6 +148,25 @@ namespace :install do
     sh "mkdir -p ~/Library/Application Support/Code/User"
     system %Q{ln -s "$PWD/vscode/settings.json" "#{filename}"}
   end
+
+  desc "link VisualStudio Code snippets"
+  task :vscode_snippets do
+    filename = File.expand_path '~/Library/Application Support/Code/User/snippets'
+    if File.exist?(filename)
+      print "overwrite #{filename}? [ynq] "
+      case $stdin.gets.chomp
+      when 'y'
+        msg "deleting #{filename}"
+        sh "rm -rf '#{filename}'"
+      when 'q'
+        exit
+      else
+        msg "skipping Visual Studio Code snippets linking"
+      end
+    end
+
+    system %Q{ln -s "$PWD/vscode/snippets" "#{filename}"}
+  end
 end
 
 def install_prompt(name, filename)
