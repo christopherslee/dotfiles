@@ -29,5 +29,6 @@
     "[vue]": {
        "editor.tabSize": 2
     },
-    "editor.wordWrapColumn": 79
+    "editor.wordWrapColumn": 79,
+    "terminal.external.osxExec": "iTerm.app"
 }
