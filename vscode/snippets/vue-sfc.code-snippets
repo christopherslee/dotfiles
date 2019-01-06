@@ -34,7 +34,7 @@
 			"}",
 			"</script>",
 			"",
-			"<style lang=\"scss\">",
+			"<style lang=\"scss\" scoped>",
 			"</style>"
 		],
 		"description": "Creates scaffold for Vue Single File Component"
