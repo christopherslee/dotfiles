@@ -131,57 +131,39 @@ namespace :install do
 
   desc "link VisualStudio Code settings"
   task :vscode_settings do
-    filename = File.expand_path '~/Library/Application Support/Code/User/settings.json'
-    if File.exist?(filename)
-      print "overwrite #{filename}? [ynq] "
-      case $stdin.gets.chomp
-      when 'y'
-        msg "deleting #{filename}"
-        sh "rm '#{filename}'"
-      when 'q'
-        exit
-      else
-        msg "skipping Visual Studio Code settings linking"
-      end
+    vscode_path = '~/Library/Application Support/Code/User'
+    filename = File.expand_path "#{vscode_path}/settings.json"
+    delete_and_symlink(filename) do
+      sh "mkdir -p #{vscode_path}"
+      system %Q{ln -s "$PWD/vscode/settings.json" "#{filename}"}
     end
-
-    sh "mkdir -p ~/Library/Application Support/Code/User"
-    system %Q{ln -s "$PWD/vscode/settings.json" "#{filename}"}
 
     filename = File.expand_path '~/Library/Application Support/Code/User/keybindings.json'
-    if File.exist?(filename)
-      print "overwrite #{filename}? [ynq] "
-      case $stdin.gets.chomp
-      when 'y'
-        msg "deleting #{filename}"
-        sh "rm '#{filename}'"
-      when 'q'
-        exit
-      else
-        msg "skipping Visual Studio Code keybinding linking"
-      end
+    delete_and_symlink(filename) do
+      system %Q{ln -s "$PWD/vscode/keybindings.json" "#{filename}"}
     end
-    system %Q{ln -s "$PWD/vscode/keybindings.json" "#{filename}"}
-  end
 
-  desc "link VisualStudio Code snippets"
-  task :vscode_snippets do
     filename = File.expand_path '~/Library/Application Support/Code/User/snippets'
-    if File.exist?(filename)
-      print "overwrite #{filename}? [ynq] "
-      case $stdin.gets.chomp
-      when 'y'
-        msg "deleting #{filename}"
-        sh "rm -rf '#{filename}'"
-      when 'q'
-        exit
-      else
-        msg "skipping Visual Studio Code snippets linking"
-      end
+    delete_and_symlink(filename) do
+      system %Q{ln -s "$PWD/vscode/snippets" "#{filename}"}
     end
-
-    system %Q{ln -s "$PWD/vscode/snippets" "#{filename}"}
   end
+end
+
+def delete_and_symlink(filename)
+  if File.exist?(filename)
+    print "re-link #{filename}? [ynq] "
+    case $stdin.gets.chomp
+    when 'y'
+      msg "deleting #{filename}"
+      sh "rm -rf '#{filename}'"
+    when 'q'
+      exit
+    else
+      msg "skipping #{name} symlinking"
+    end
+  end
+  yield
 end
 
 def install_prompt(name, filename)
