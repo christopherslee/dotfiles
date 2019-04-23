@@ -26,8 +26,11 @@
     "elixirLS.suggestSpecs": false,
     "elixirLS.dialyzerEnabled": false,
     "workbench.statusBar.feedback.visible": false,
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
     "[vue]": {
-       "editor.tabSize": 2
+        "editor.tabSize": 2
     },
     "editor.wordWrapColumn": 79,
     "terminal.external.osxExec": "iTerm.app"
